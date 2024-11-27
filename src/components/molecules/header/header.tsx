@@ -7,10 +7,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/atomics/dropdown-menu";
 import Title from "@/components/atomics/title";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 function Header() {
+  const { data: session } = useSession();
+  console.log("🚀 ~ Header ~ session:", session);
+
   return (
     <header className="container mx-auto fixed inset-x-0 top-[30px] z-20">
       <div className="p-[30px] rounded-[30px] bg-white flex justify-between items-center">
@@ -47,8 +52,7 @@ function Header() {
         </nav>
 
         <div
-          // data-login={!!session?.user}
-          data-login={false}
+          data-login={!!session?.user}
           className="data-[login=true]:hidden data-[login=false]:flex items-center space-x-3"
         >
           <Button variant="secondary" size="header">
@@ -61,23 +65,22 @@ function Header() {
 
         <DropdownMenu>
           <DropdownMenuTrigger
-            // data-login={!!session?.user}
-            data-login={false}
+            data-login={!!session?.user}
             className="data-[login=false]:hidden outline-none"
           >
             <div className="flex items-center space-x-2">
               <Title
-                // title={session?.user.name}
+                title={session?.user.name}
                 subtitle="Howdy"
                 section="header"
               />
-              {/* <Image
-                src="/images/avatar.webp"
+              <Image
+                src="/icons/ic_zgaphy.png"
                 alt="avatar"
                 height={48}
                 width={48}
                 className="rounded-full"
-              /> */}
+              />
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-[240px] mr-8 space-y-4">
