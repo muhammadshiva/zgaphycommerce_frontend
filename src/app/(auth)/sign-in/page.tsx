@@ -43,118 +43,119 @@ function SignIn() {
   async function onSubmit(values: FormData) {
     try {
       const res = await login(values).unwrap();
+      console.log("🚀 ~ onSubmit ~ values:", res);
 
-      if (res.success) {
-        const user = res.data;
-
-        const loginRes = await signIn("credentials", {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          token: user.token,
-          callbackUrl: searchParams.get("callbackUrl") || "/",
-          redirect: false,
-        });
-        toast({
-          title: "Welcome",
-          description: "Sign in successfully",
-          open: true,
-        });
-
-        router.push(loginRes?.url || "/");
-      }
-
-      // router.push("/");
+      form.reset();
+      toast({
+        title: "Login Successful",
+        description: "You are now logged in.",
+        open: true,
+      });
     } catch (error: any) {
       toast({
-        title: "Something went wrong",
-        description: error.data.message,
+        title: "Login Successful",
+        description: error.data.mesaage,
         variant: "destructive",
       });
     }
   }
 
   return (
-    <div
-      className={`px-6 py-24 lg:px-28 bg-primary-foreground bg-cover lg:bg-contain bg-right bg-no-repeat bg-[url('/images/bg-image.svg')] h-screen flex items-center`}
-    >
-      <div className="p-8 bg-white rounded-[30px] max-w-full lg:max-w-[460px] lg:min-w-[460px] space-y-[30px]">
-        <Image src="/images/logo.svg" alt="nidejia" height={36} width={133} />
-        <Title
-          title="Sign In"
-          subtitle="Rent and make money online"
-          section=""
-        />
+    <div className="bg-[#0D0E25]">
+      <div className="mx-auto max-w-screen-lg h-screen flex items-center justify-center">
+        <div className="p-8 bg-white rounded-[30px] max-w-full lg:max-w-[460px] lg:min-w-[460px] space-y-[30px]">
+          <div className="flex flex-row items-center gap-x-3">
+            <Image
+              src="/icons/ic_zgaphy.png"
+              alt="nidejia"
+              height={50}
+              width={50}
+            />
 
-        {/* Form for create account */}
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-[30px]"
-          >
-            <div className="space-y-5">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Email Address"
-                        icon="/icons/sms.svg"
-                        variant="auth"
-                        className={
-                          form.formState.errors.email && "border-destructive"
-                        }
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Password"
-                        icon="/icons/lock-circle.svg"
-                        variant="auth"
-                        className={
-                          form.formState.errors.password && "border-destructive"
-                        }
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox id="terms" />
-              <label
-                htmlFor="terms"
-                className="text-sm font-semibold leading-[21px] peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            <Title title="Zgaphy" subtitle="" section="" />
+          </div>
+
+          <Title
+            title="Sign In"
+            subtitle="And the best artworks you deserve"
+            section=""
+          />
+
+          {/* Form for create account */}
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-[30px]"
+            >
+              <div className="space-y-5">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Email Address"
+                          icon="/icons/sms.svg"
+                          variant="auth"
+                          className={
+                            form.formState.errors.email && "border-destructive"
+                          }
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          icon="/icons/lock-circle.svg"
+                          variant="auth"
+                          className={
+                            form.formState.errors.password &&
+                            "border-destructive"
+                          }
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-semibold leading-[21px] peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Remember me
+                </label>
+              </div>
+              <Button
+                className="bg-orange-500"
+                type="submit"
+                disabled={isLoading}
               >
-                Remember me
-              </label>
-            </div>
-            <Button type="submit" disabled={isLoading}>
-              Sign In
-            </Button>
-            <Link href="/sign-up">
-              <Button variant="third" type="button" className="mt-3">
-                Create New Account
+                Sign In
               </Button>
-            </Link>
-          </form>
-        </Form>
+              <Link href="/sign-up">
+                <Button variant="third" type="button" className="mt-3">
+                  Create New Account
+                </Button>
+              </Link>
+            </form>
+          </Form>
+        </div>
       </div>
     </div>
   );

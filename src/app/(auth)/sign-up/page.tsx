@@ -79,7 +79,7 @@ function SignUp() {
 
   return (
     <div
-      className={`px-6 py-24 lg:px-28 bg-primary-foreground bg-cover lg:bg-contain bg-right bg-no-repeat bg-[url('/images/bg-image.svg')] h-screen flex items-center`}
+      className={`px-6 bg-[#0D0E25] bg-cover py-24 lg:px-28 h-screen flex items-center`}
     >
       <div className="p-8 bg-white rounded-[30px] max-w-full lg:max-w-[460px] lg:min-w-[460px] space-y-[30px]">
         <Image src="/images/logo.svg" alt="nidejia" height={36} width={133} />
