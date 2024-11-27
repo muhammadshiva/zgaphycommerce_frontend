@@ -43,14 +43,28 @@ function SignIn() {
   async function onSubmit(values: FormData) {
     try {
       const res = await login(values).unwrap();
-      console.log("🚀 ~ onSubmit ~ values:", res);
 
-      form.reset();
-      toast({
-        title: "Login Successful",
-        description: "You are now logged in.",
-        open: true,
-      });
+      //* Next Auth Session
+      if (res.success) {
+        const user = res.data;
+
+        const loginRes = await signIn("credentials", {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          token: user.token,
+          callbackUrl: searchParams.get("callbackUrl") || "/",
+          redirect: false,
+        });
+        toast({
+          title: "Login Successful",
+          description: "You are now logged in.",
+          open: true,
+        });
+
+        router.push(loginRes?.url || "/");
+        console.log("🚀 ~ onSubmit ~ loginRes?.url :", loginRes?.url);
+      }
     } catch (error: any) {
       toast({
         title: "Something went wrong",
