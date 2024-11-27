@@ -50,14 +50,26 @@ function SignUp() {
         password_confirmation: values.password,
       }).unwrap();
 
-      console.log("🚀 ~ onSubmit ~ values:", res);
+      //* Next Auth Session
+      if (res.success) {
+        const user = res.data;
 
-      form.reset();
-      toast({
-        title: "Login Successful",
-        description: "You are now logged in.",
-        open: true,
-      });
+        await signIn("credentials", {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          token: user.token,
+          redirect: false,
+        });
+
+        toast({
+          title: "Welcome",
+          description: "Sign up successfully",
+          open: true,
+        });
+
+        router.push("/");
+      }
     } catch (error: any) {
       toast({
         title: "Something went wrong",
