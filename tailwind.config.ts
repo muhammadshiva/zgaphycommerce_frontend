@@ -9,6 +9,7 @@ const config = {
     './src/**/*.{ts,tsx}',
 	],
   prefix: '',
+  
   theme: {
     container: {
 
@@ -20,6 +21,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        // poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
+        blaka: ['Blaka', 'cursive'],
+      },
       boxShadow: {
         button: '0px 10px 20px 0px #FF935780',
         indicator: '0px 10px 20px 0px #1A143C1A'
@@ -82,6 +87,7 @@ const config = {
       },
     },
   },
+
   plugins: [require('tailwindcss-animate')],
 } satisfies Config
 
