@@ -4,7 +4,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import Header from "@/components/molecules/header/header";
 import Footer from "@/components/molecules/footer/footer";
-
+import ReduxProvider from "@/providers/redux";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -27,9 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Header />
-        {children}
-        <Footer />
+        <ReduxProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );
