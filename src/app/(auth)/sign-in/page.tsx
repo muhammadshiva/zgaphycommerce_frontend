@@ -53,7 +53,7 @@ function SignIn() {
       });
     } catch (error: any) {
       toast({
-        title: "Login Successful",
+        title: "Something went wrong",
         description: error.data.mesaage,
         variant: "destructive",
       });
@@ -77,7 +77,7 @@ function SignIn() {
 
           <Title
             title="Sign In"
-            subtitle="And the best artworks you deserve"
+            subtitle="And get the best artworks you deserve"
             section=""
           />
 

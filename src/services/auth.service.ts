@@ -1,3 +1,4 @@
+import { register } from "module";
 import { apiSlice } from "./base-query";
 
 export const authApi = apiSlice.injectEndpoints({
@@ -9,7 +10,15 @@ export const authApi = apiSlice.injectEndpoints({
                 body: credentials,
             }),
         }),
+
+        register: builder.mutation({
+            query: (credentials) => ({
+                url: "/register",
+                method: "POST",
+                body: credentials,
+            })
+        })
     }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation } = authApi;
