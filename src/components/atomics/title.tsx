@@ -1,5 +1,7 @@
 const getTitleStyle = (section: string) => {
   switch (section) {
+    case "white":
+      return "text-2xl leading-9 text-white";
     case "hero":
       return "text-[55px] leading-[82.5px]";
     case "header":

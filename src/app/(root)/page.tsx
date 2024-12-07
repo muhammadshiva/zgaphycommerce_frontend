@@ -1,4 +1,4 @@
-import { Button } from "@/components/atomics/button";
+  import { Button } from "@/components/atomics/button";
 import { Input } from "@/components/atomics/input";
 import { Separator } from "@/components/atomics/separator";
 import Title from "@/components/atomics/title";
@@ -17,8 +17,8 @@ function Home() {
         <div className="pt-20 lg:pt-[226px] container mx-auto px-5 lg:px-0">
           <div className="flex flex-row justify-between">
             <div className="flex flex-col ml-20">
-              <h1 class="text-outline font-light text-white mb-4 text-3xl dark:text-white md:text-5xl lg:text-8xl">
-                <span class="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text font-blaka text-transparent">
+              <h1 className="text-outline font-light text-white mb-4 text-3xl dark:text-white md:text-5xl lg:text-8xl">
+                <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text font-blaka text-transparent">
                   Zgaphy World Where Collectors Gather
                 </span>
               </h1>
@@ -48,11 +48,12 @@ function Home() {
         id="indicator-section"
         className="px-5 lg:px-10 xl:container xl:mx-auto -mt-16 pb-9"
       >
-        <div className="h-[550px] flex justify-center xl:justify-between items-center space-x-6 xl:space-x-12 bg-white shadow-indicator rounded-[20px] px-5 lg:px-[5px] xl:py-[29px]">
+        <div className="h-[600px] flex justify-center xl:justify-between items-center space-x-6 xl:space-x-12 bg-white shadow-indicator rounded-[20px] px-5 lg:px-[5px] xl:py-[29px]">
           <ArtworkShowcase
             id="deals-section"
             title="Our Latest Artworks"
             subtitle="Explore the beauty of artworks you deserve"
+            isRoot={true}
           />
         </div>
       </section>
