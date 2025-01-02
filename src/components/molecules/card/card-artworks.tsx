@@ -1,8 +1,98 @@
 "use client";
-import { DealsProps } from "@/interfaces/landing-page";
-import { moneyFormat } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
+import { Button } from "@/components/atomics/button";
+import { formatPrice } from "@/lib/utils";
+
+function CardArtwork({
+  image,
+  title,
+  slug,
+  price,
+  isRoot = false,
+}: {
+  image: string;
+  title: string;
+  slug: string;
+  price: number;
+  isRoot?: boolean;
+}) {
+  const [isError, setIsError] = useState(false);
+  const router = useRouter();
+
+  const url = `${process.env.NEXT_PUBLIC_STORAGE_BASE_URL}/${image}`;
+
+  return (
+    <>
+      {!isError ? (
+        <div className="flex flex-col">
+          <div className="group relative block overflow-hidden rounded-lg">
+            <Image
+              src={url}
+              alt={title}
+              width={350}
+              height={350}
+              unoptimized
+              onError={() => setIsError(true)}
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <button
+                className="rounded-md bg-[#FF8520] px-4 py-2 font-bold text-white"
+                onClick={() => router.push(`/artwork/${slug}`)}
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <div
+            className={`px-2 flex flex-col gap-y-4 mt-7 justify-between ${
+              isRoot ? "hidden" : ""
+            }`}
+          >
+            <div className="flex flex-col gap-y-[5px]">
+              <p className="text-white font-semibold text-[16px] line-clamp-1">
+                {title}
+              </p>
+              <p className="text-subtitle">Zgaphy Warrior</p>
+              {/* <p className="font-bold text-orange-500 text-[20px]">
+                {formatPrice(price)}
+              </p> */}
+            </div>
+            {/* 
+            <Button
+              onClick={() => router.push("/checkout")}
+              className="bg-green-500 rounded-lg"
+            >
+              <div className="flex flex-row gap-x-2">
+                <Image
+                  src="/icons/whatsapp.svg"
+                  alt="arrow-left"
+                  height={20}
+                  width={20}
+                />
+                <span className="font-medium text-sm">Order via WhatApp</span>
+              </div>
+            </Button> */}
+          </div>
+        </div>
+      ) : (
+        <div className="w-80 h-80 gap-3 flex flex-col items-center justify-center rounded-lg bg-gray-300">
+          <Image
+            src="/images/error-image.png"
+            alt="error"
+            height={50}
+            width={50}
+          />
+          <p className="text-[#ABABAB]">No Image</p>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default CardArtwork;
 
 // function CardDeals({
 //   image,
@@ -95,44 +185,3 @@ import Link from "next/link";
 // }
 
 // export default CardDeals;
-
-function CardArtwork() {
-  return (
-    <div className="max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
-      <div className="group relative block overflow-hidden rounded-t-lg">
-        {/* <img
-          className="p-4 transition-transform duration-300 group-hover:scale-105"
-          src="/images/ilustration-artwork.png"
-          alt="product image"
-        /> */}
-
-        <Image
-          src={"/images/ilustration-artwork.png"}
-          width={250}
-          height={250}
-        />
-
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <button className="rounded-md bg-[#FF8520] px-4 py-2 font-bold text-white">
-            View Details
-          </button>
-        </div>
-      </div>
-
-      <div className="flex flex-col p-4 gap-y-1">
-        <h4 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white lg:text-xl">
-          Fight Againts A.I
-        </h4>
-        <span className="text-xl font-bold text-gray-900 dark:text-white lg:text-xl">
-          Rp. 100.000
-        </span>
-        <button className="rounded-lg bg-orange-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          {" "}
-          Add to cart
-        </button>
-      </div>
-    </div>
-  );
-}
-
-export default CardArtwork;
