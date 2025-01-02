@@ -11,3 +11,14 @@ const moneyFormat = new Intl.NumberFormat("en-US", {
 });
 
 export { moneyFormat };
+
+export function formatPrice(price: number): string {
+  const formattedPrice = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0, // Untuk menghilangkan desimal
+  }).format(price);
+
+  // Menghilangkan "IDR" dan menggantinya dengan "Rp."
+  return formattedPrice.replace("IDR", "Rp").trim();
+}

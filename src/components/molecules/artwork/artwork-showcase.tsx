@@ -8,33 +8,49 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/atomics/carousel";
-import artworks from "@/json/artworks.json";
+// import artworks from "@/json/artworks.json";
 import { Artwork } from "@/interfaces/artwork";
 import CardArtworks from "../card/card-artworks";
+import { useGetAllArtworkQuery } from "@/services/artwork.service";
+import Link from "next/link";
 
 interface ArtworkShowcaseProps {
   id: string;
   title: string;
   subtitle: string;
+  isRoot: boolean;
 }
 
-function ArtworkShowcase({ id, title, subtitle }: ArtworkShowcaseProps) {
+function ArtworkShowcase({
+  id,
+  title,
+  subtitle,
+  isRoot,
+}: ArtworkShowcaseProps) {
+  const { data: artworks } = useGetAllArtworkQuery({});
+
   return (
     <section id={id} className="px-10 xl:container xl:mx-auto pt-16 pb-[100px]">
       <div className="flex justify-center text-center">
         <Title title={title} subtitle={subtitle} />
       </div>
+      <div className="flex justify-end text-right">
+        <Link href="/artwork">
+          <p className="font-semibold text-orange-500 text-md">Load More</p>
+        </Link>
+      </div>
       <Carousel className="w-full mt-[30px]">
         <CarouselContent>
-          {/* Json Data */}
-          {artworks.data.map((item: Artwork) => (
-            <CarouselItem key={item.id} className="basis-1/4">
+          {artworks?.data?.data.map((item: Artwork) => (
+            <CarouselItem key={item.id} className="basis-1/3">
               <CardArtworks
-                image={item.cover || "/images/default.png"}
+                image={item.image}
                 title={item.title}
-                slug={"/artwork/" + item.slug}
+                slug={item.slug}
+                price={item.price}
                 description={item.description}
                 address={item.address}
+                isRoot={isRoot}
               />
             </CarouselItem>
           ))}
@@ -68,4 +84,3 @@ export default ArtworkShowcase;
 //* BACKUP SOURCE CODE
 //   const { data: artworks } = useGetAllArtworkQuery({});
 // import { useGetAllListingQuery } from "@/services/listing.service";
-//   const { data: artworks } = useGetAllArtworkQuery({});
