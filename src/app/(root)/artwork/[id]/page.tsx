@@ -105,7 +105,13 @@ function Detail({ params }: { params: { id: string } }) {
 
               <div className="flex flex-col items-center gap-y-1">
                 <div className="group relative block overflow-hidden rounded-t-lg">
-                  <Image src={url} width={400} height={400} unoptimized />
+                  <Image
+                    alt="Artwork Image"
+                    src={url}
+                    width={400}
+                    height={400}
+                    unoptimized
+                  />
 
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <button className="rounded-md bg-[#FF8520] px-4 py-2 font-bold text-white">
