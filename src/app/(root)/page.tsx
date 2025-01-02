@@ -1,4 +1,4 @@
-  import { Button } from "@/components/atomics/button";
+import { Button } from "@/components/atomics/button";
 import { Input } from "@/components/atomics/input";
 import { Separator } from "@/components/atomics/separator";
 import Title from "@/components/atomics/title";
@@ -27,10 +27,6 @@ function Home() {
                 We provide a variety of beautiful artworks that can make <br />{" "}
                 your life more colorful.
               </p>
-
-              <Button className="w-fit bg-orange-500">
-                How to get collector code ?
-              </Button>
             </div>
 
             <Image

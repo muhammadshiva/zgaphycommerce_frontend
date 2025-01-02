@@ -1,21 +1,27 @@
 "use client";
-import { useRouter } from "next/navigation"; // Import useRouter
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
+import { Button } from "@/components/atomics/button";
+import { formatPrice } from "@/lib/utils";
 
 function CardArtwork({
   image,
   title,
-  slug, // Tambahkan slug sebagai prop
+  slug,
+  price,
   isRoot = false,
 }: {
   image: string;
   title: string;
-  slug: string; // Properti untuk slug halaman detail
+  slug: string;
+  price: number;
   isRoot?: boolean;
 }) {
   const [isError, setIsError] = useState(false);
-  const router = useRouter(); // Inisialisasi useRouter
+  const router = useRouter();
+
+  const url = `${process.env.NEXT_PUBLIC_STORAGE_BASE_URL}/${image}`;
 
   return (
     <>
@@ -23,7 +29,7 @@ function CardArtwork({
         <div className="flex flex-col">
           <div className="group relative block overflow-hidden rounded-lg">
             <Image
-              src={`${process.env.NEXT_PUBLIC_STORAGE_BASE_URL}/${image}`}
+              src={url}
               alt={title}
               width={350}
               height={350}
@@ -31,10 +37,9 @@ function CardArtwork({
               onError={() => setIsError(true)}
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              {/* Navigasi ke halaman detail */}
               <button
                 className="rounded-md bg-[#FF8520] px-4 py-2 font-bold text-white"
-                onClick={() => router.push(`/artwork/${slug}`)} // Navigasi ke halaman detail
+                onClick={() => router.push(`/artwork/${slug}`)}
               >
                 View Details
               </button>
@@ -42,21 +47,34 @@ function CardArtwork({
           </div>
 
           <div
-            className={`px-2 flex flex-row gap-x-2 mt-7 justify-between ${
+            className={`px-2 flex flex-col gap-y-4 mt-7 justify-between ${
               isRoot ? "hidden" : ""
             }`}
           >
             <div className="flex flex-col gap-y-[5px]">
-              <p className="text-white font-semibold text-[16px]">{title}</p>
-              <p className="text-subtitle">Rp. 50.000</p>
+              <p className="text-white font-semibold text-[16px] line-clamp-1">
+                {title}
+              </p>
+              <p className="text-subtitle">Zgaphy Warrior</p>
+              {/* <p className="font-bold text-orange-500 text-[20px]">
+                {formatPrice(price)}
+              </p> */}
             </div>
-            <Image
-              src="/icons/cart-filled.svg"
-              alt="language"
-              height={24}
-              width={24}
-              className="cursor-pointer"
-            />
+            {/* 
+            <Button
+              onClick={() => router.push("/checkout")}
+              className="bg-green-500 rounded-lg"
+            >
+              <div className="flex flex-row gap-x-2">
+                <Image
+                  src="/icons/whatsapp.svg"
+                  alt="arrow-left"
+                  height={20}
+                  width={20}
+                />
+                <span className="font-medium text-sm">Order via WhatApp</span>
+              </div>
+            </Button> */}
           </div>
         </div>
       ) : (
