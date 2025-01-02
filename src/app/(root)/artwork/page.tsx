@@ -15,7 +15,7 @@ function Artwork() {
           <Title
             title={"List of Artworks"}
             subtitle={"Get the best artwork you deserve"}
-            section="white"
+            section="hero"
           />
         </div>
 
