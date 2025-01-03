@@ -58,6 +58,7 @@ function Title({
   subtitle?: string | undefined;
   section?:
     | "hero"
+    | "hero-white"
     | "header"
     | "categories"
     | "detail"

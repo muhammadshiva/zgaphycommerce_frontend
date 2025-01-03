@@ -92,7 +92,7 @@ function SignIn() {
           <Title
             title="Sign In"
             subtitle="And get the best artworks you deserve"
-            section=""
+            section="hero"
           />
 
           {/* Form for create account */}
