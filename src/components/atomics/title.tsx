@@ -1,6 +1,6 @@
 const getTitleStyle = (section: string) => {
   switch (section) {
-    case "white":
+    case "hero-white":
       return "text-2xl leading-9 text-white text-center";
     case "white-left":
       return "text-2xl leading-9 text-white text-left";
@@ -29,6 +29,8 @@ const getSubtitleStyle = (section: string) => {
   switch (section) {
     case "hero":
       return "text-lg leading-8 text-white";
+    case "hero-white":
+      return "text-lg leading-8 text-subtitle";
     case "header":
       return "text-sm leading-[21px] text-subtitle";
     case "categories":

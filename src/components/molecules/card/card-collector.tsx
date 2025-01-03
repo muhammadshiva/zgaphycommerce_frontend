@@ -8,7 +8,7 @@ function CardCollector({
   image,
   title,
 }: {
-  number: id;
+  id: string;
   image: string;
   title: string;
 }) {

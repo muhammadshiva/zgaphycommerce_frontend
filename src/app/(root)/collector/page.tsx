@@ -6,6 +6,13 @@ import CardCollector from "@/components/molecules/card/card-collector";
 import { useGetCollectorsQuery } from "@/services/collector.service";
 import Image from "next/image";
 
+interface CollectorItem {
+  artwork: {
+    id: string;
+    image: string;
+    title: string;
+  };
+}
 function Collector() {
   const { data: collectors } = useGetCollectorsQuery({});
 
@@ -22,7 +29,7 @@ function Collector() {
         {/* Scrollable Grid */}
         <div className="flex-1 overflow-y-auto scrollbar-hide mt-10">
           <div className="grid grid-cols-4 gap-20">
-            {collectors?.data.map((item: Collector) => (
+            {collectors?.data.map((item: CollectorItem) => (
               <CardCollector
                 id={item.artwork.id}
                 image={item.artwork.image}

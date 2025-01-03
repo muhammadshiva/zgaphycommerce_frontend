@@ -5,16 +5,29 @@ import { useGetCollectorDetailQuery } from "@/services/collector.service";
 import Image from "next/image";
 import Title from "@/components/atomics/title";
 
+// Define the type for Collector
+interface Collector {
+  id: string;
+  image_barcode: string;
+  name: string;
+  address: string;
+  // Add other properties here based on your data
+}
+
 function CollectorDetail() {
   const { id } = useParams(); // Mendapatkan ID dari URL
-  const { data: collector, isLoading, error } = useGetCollectorDetailQuery(id);
+
+  // Convert id to a number if it's a string
+  const numericId = Array.isArray(id) ? parseInt(id[0], 10) : parseInt(id, 10);
+
+  const {
+    data: collector,
+    isLoading,
+    error,
+  } = useGetCollectorDetailQuery(numericId);
 
   if (isLoading) {
     return <p>Loading collector details...</p>;
-  }
-
-  if (error) {
-    return <p className="text-red-500">Failed to load collector details.</p>;
   }
 
   // Ambil URL gambar pertama
@@ -56,7 +69,7 @@ function CollectorDetail() {
                 <Title
                   title={item.name}
                   subtitle={item.address}
-                  section="white-subtitle"
+                  section="hero"
                 />
               </div>
             ))}

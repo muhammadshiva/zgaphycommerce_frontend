@@ -31,7 +31,7 @@ function Header() {
               height={50}
               width={50}
             />
-            <Title title={"Zgaphy World"} subtitle={""} section="white" />
+            <p className="text-white font-semibold text-2xl">Zgaphy World</p>
           </div>
         </Link>
         {/* text-black on scroll down */}

@@ -9,15 +9,16 @@ import {
   CarouselPrevious,
 } from "@/components/atomics/carousel";
 // import artworks from "@/json/artworks.json";
-import { Artwork } from "@/interfaces/artwork";
 import CardArtworks from "../card/card-artworks";
 import { useGetAllArtworkQuery } from "@/services/artwork.service";
 import Link from "next/link";
 
-interface ArtworkShowcaseProps {
+interface ArtworkShowcaseItem {
   id: string;
+  image: string;
   title: string;
-  subtitle: string;
+  slug: string;
+  price: number;
   isRoot: boolean;
 }
 
@@ -26,7 +27,12 @@ function ArtworkShowcase({
   title,
   subtitle,
   isRoot,
-}: ArtworkShowcaseProps) {
+}: {
+  id: string;
+  title: string;
+  subtitle: string;
+  isRoot: boolean;
+}) {
   const { data: artworks } = useGetAllArtworkQuery({});
 
   return (
@@ -41,15 +47,13 @@ function ArtworkShowcase({
       </div>
       <Carousel className="w-full mt-[30px]">
         <CarouselContent>
-          {artworks?.data?.data.map((item: Artwork) => (
+          {artworks?.data?.data.map((item: ArtworkShowcaseItem) => (
             <CarouselItem key={item.id} className="basis-1/3">
               <CardArtworks
                 image={item.image}
                 title={item.title}
                 slug={item.slug}
                 price={item.price}
-                description={item.description}
-                address={item.address}
                 isRoot={isRoot}
               />
             </CarouselItem>
